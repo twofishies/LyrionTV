@@ -73,14 +73,13 @@ http://lms.example:9000/plugins/LyrionJS/?tvui=large&tvschedheadroom=0
 | `tvschedule=0` | Turns off Scheduled PCM for comparison. The launcher defaults to `tvschedule=1`. |
 | `tvsingle=0` | Turns off the shared audio context and the TV audio paths that depend on it, including Scheduled PCM. The launcher defaults to `tvsingle=1`. |
 | `tvsmooth=1` | Enables the legacy jitter experiment. To try a larger buffer on the main-thread output path, add `tvbuffer=16384` alongside it. That buffer setting does not apply to Scheduled PCM. |
-
-The launcher always adds `tvnav=1` to enable TV navigation. It preserves the other values you enter.
+| `tvnav=1` | The default for the WebOS launcher, this flag enables passthrough of IR remote codes to enable proper TV navigation. Set to 0 to turn TV navigation off. |
 
 ## Troubleshooting
 
-- **The TV can't connect.** Open the same LyrionJS address on another device on your network. Check the hostname, port and `/plugins/LyrionJS/` path, then reopen launcher setup to correct the address.
-- **The page opens but the remote doesn't move focus.** Confirm you launched **Lyrion TV** from the app launcher and that LMS is serving the built HTML. Restart LMS after replacing the file and fully relaunch the TV app. Try `tvdebug=1` for startup status.
-- **The interface works but the TV is silent.** Check that **Play music in this browser** is enabled and that the TV is the selected LMS player. Press **Blue** to see the output mode, input format and playback counters.
+- **The TV can't connect.** Open the same LyrionJS address on another device on your network. Check the hostname, port and `/plugins/LyrionJS/` path, then reopen launcher setup to correct the address. 
+- **The page opens but the remote doesn't move focus.** Confirm you launched **Lyrion TV** from the app launcher and that LMS is serving the built HTML. Restart LMS after replacing the file and fully relaunch the TV app. Try `tvdebug=1` for startup status. Try forcing TV navigation with `tvnav=1`.
+- **The interface works but the TV is silent.** Check that **Play music in this browser** is enabled in Settings in the TV interface, and that the TV is the selected LMS player. Press **Blue** to see the output mode, input format and playback counters. 
 - **Playback skips or sync drifts.** Play a track on the TV by itself first. Then try one other player in a sync group. Use Blue diagnostics to compare scheduling and sync corrections, and change one URL flag at a time.
 - **An LMS plugin update replaced the TV build.** Reinstall the plugin ZIP from this fork and skip upstream LyrionJS updates for this installation. To roll back, stop LMS, remove the TV plugin directory, restore your previous plugin directory if you had one, and start LMS.
 
