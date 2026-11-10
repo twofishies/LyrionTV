@@ -1,6 +1,6 @@
 # Lyrion TV source
 
-Lyrion TV has two components. The webOS 1.1.0 launcher saves the LMS URL and opens it with TV defaults. LMS serves the player, a locally modified LyrionJS 0.2.34 HTML bundle. Both are built here.
+Lyrion TV has two components. The webOS 1.1.0 launcher saves the LMS URL and opens it with TV defaults. The LMS package bundles the LyrionJS 0.2.34 server files from this fork with the modified TV page. Both packages are built here.
 
 ## Build
 
@@ -11,7 +11,7 @@ python3 build.py
 node launcher/tests/launcher.cjs
 ```
 
-The build uses Python 3.9 or later and runs offline. It writes `dist/lyrionjs.html`, `dist/org.lyrionjs.tv_1.1.0_all.ipk`, and `dist/SHA256SUMS`. Use `--out DIRECTORY` to build elsewhere. The build starts from the pinned HTML each time and replays the patches in a scratch directory. It does not need any of the sibling `outputs/` or `work/` directories. The IPK normalizes archive timestamps and ownership. Use the same Python/zlib versions for byte-identical compressed output across hosts.
+The build uses Python 3.9 or later and runs offline. It writes the complete `dist/LyrionJS-0.2.34-tv.zip` LMS plugin, `dist/org.lyrionjs.tv_1.1.0_all.ipk`, a standalone `dist/lyrionjs.html` for inspection, and `dist/SHA256SUMS`. Use `--out DIRECTORY` to build elsewhere. The build starts from the pinned HTML each time and replays the patches in a scratch directory. It does not need any of the sibling `outputs/` or `work/` directories. The ZIP and IPK use normalized archive metadata. Use the same Python/zlib versions for byte-identical compressed output across hosts.
 
 To include the optional page lifecycle recorder:
 
@@ -36,7 +36,8 @@ The older playback diagnostics installer and standalone reservoir fix are supers
 
 ## Deploy
 
-- On LMS, back up the current `Plugins/LyrionJS/HTML/lyrionjs.html` from the installed plugin and replace it with the generated `lyrionjs.html`, preserving ownership and permissions. Restart LMS, fully close and relaunch the TV app, and check that the served page matches the built HTML. Restore the backup and restart LMS to roll back. This replacement is tied to the captured 0.2.34 build. Rebase and review the patches before applying them to a newer LyrionJS release.
+- Follow the [installation steps](../README.md#install-and-connect) for the ZIP and IPK. The ZIP contains the contents of the plugin directory, with `install.xml` at its root. Extract it into `Plugins/LyrionJS/`. The resulting plugin uses the existing `LyrionJS` name and URL, so keep a single installed copy.
+- Use this ZIP for the TV installation and skip upstream LyrionJS updates for that copy. The inherited root `repo.xml` describes the upstream distribution and is separate from this fork's manual ZIP install.
 - For a TV that needs the launcher, install the IPK through Glasshouse. Install over an existing launcher to preserve its saved URL. The package uses app ID `org.lyrionjs.tv` and the existing 1.1.0 version. The app payload matches the previous 1.1.0 package. The package file itself has different archive metadata. The launcher has no bundled LMS address.
 
 ## Source provenance
@@ -53,4 +54,4 @@ node tools/rebuild.mjs
 
 The later audio patches match specific converted script hashes. If the compatibility inputs change, review and rebase those patches together.
 
-Check the contents of this directory into source control. `dist/` is generated and ignored.
+Build from the full fork checkout so the adjacent `plugin/LyrionJS/` source is available. `dist/` is generated and ignored.

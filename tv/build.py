@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the LMS page and webOS launcher from the pinned local source."""
+"""Build the LMS plugin and webOS launcher from the pinned local source."""
 import argparse
 import gzip
 import hashlib
@@ -11,8 +11,11 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+from xml.etree import ElementTree
+import zipfile
 
 ROOT = Path(__file__).resolve().parent
+LYRIONJS_VERSION = "0.2.34"
 BASE_SHA256 = "ae5e8a7451710d5b1de2b720b2dce757be385200968caf684e967c247cda7ecd"
 
 PATCHES = (
@@ -38,7 +41,7 @@ def sha256(data):
 
 
 def build_page(work, include_page_recorder):
-    base = ROOT / "base/lyrionjs-0.2.34.html"
+    base = ROOT / "base" / f"lyrionjs-{LYRIONJS_VERSION}.html"
     if sha256(base.read_bytes()) != BASE_SHA256:
         raise SystemExit("The pinned LMS baseline has changed.")
     page = work / "lyrionjs.html"
@@ -48,6 +51,36 @@ def build_page(work, include_page_recorder):
             subprocess.run([sys.executable, ROOT / "patches" / LIFECYCLE, page], check=True)
         subprocess.run([sys.executable, ROOT / "patches" / patch, page], check=True)
     return page.read_bytes()
+
+
+def build_plugin(page):
+    plugin = ROOT.parent / "plugin/LyrionJS"
+    manifest = plugin / "install.xml"
+    if not manifest.is_file():
+        raise SystemExit("Build from a complete LyrionTV checkout. Missing plugin/LyrionJS/install.xml.")
+    version = ElementTree.parse(manifest).findtext("version")
+    if version != LYRIONJS_VERSION:
+        raise SystemExit(f"Expected LyrionJS {LYRIONJS_VERSION} server files, found {version}.")
+
+    files = {"HTML/lyrionjs.html": page}
+    for path in sorted(plugin.rglob("*")):
+        relative = path.relative_to(plugin)
+        if any(part.startswith(".") for part in relative.parts):
+            continue
+        if path.is_symlink() or not path.is_file() or path.name.endswith(("~", ".swp", ".bak", ".orig")):
+            continue
+        name = relative.as_posix()
+        if name != "HTML/lyrionjs.html":
+            files[name] = path.read_bytes()
+
+    payload = io.BytesIO()
+    with zipfile.ZipFile(payload, "w") as archive:
+        for name, data in sorted(files.items()):
+            entry = zipfile.ZipInfo(name)
+            entry.create_system = 3
+            entry.external_attr = 0o644 << 16
+            archive.writestr(entry, data, compress_type=zipfile.ZIP_DEFLATED)
+    return f"LyrionJS-{version}-tv.zip", payload.getvalue()
 
 
 def tar_gzip(entries):
@@ -102,9 +135,10 @@ def main():
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="lyrion-tv-") as temp:
         page = build_page(Path(temp), args.include_page_recorder)
+    plugin_name, plugin_zip = build_plugin(page)
     name, ipk = build_ipk()
     args.out.mkdir(parents=True, exist_ok=True)
-    artifacts = {"lyrionjs.html": page, name: ipk}
+    artifacts = {plugin_name: plugin_zip, name: ipk, "lyrionjs.html": page}
     for filename, data in artifacts.items():
         (args.out / filename).write_bytes(data)
     checksums = "".join(f"{sha256(data)}  {filename}\n" for filename, data in artifacts.items())

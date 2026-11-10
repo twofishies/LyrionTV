@@ -2,7 +2,7 @@
 
 Play your [Lyrion Music Server](https://lyrion.org/) (LMS) library through your LG TV and browse it with the remote. Lyrion TV is a fork of [LyrionJS](https://github.com/JameZUK/LyrionJS) for rooted LG webOS TVs. The TV can play through its own audio output or control another LMS player. It can also join an LMS sync group.
 
-There are two pieces to install. The **webOS launcher** remembers your server address and opens LyrionJS in the TV app runtime. The **LMS-hosted page** provides the large-screen layout, remote navigation and audio compatibility changes. Both are built from this repository.
+There are two pieces to install. The **webOS launcher** remembers your server address and opens LyrionJS in the TV app runtime. The **LMS plugin** includes the LyrionJS 0.2.34 server code and the TV page with large-screen layout, remote navigation and audio compatibility changes. This fork builds both packages together.
 
 ![Lyrion TV Now Playing with a focus ring, album artwork placeholder and transport controls](tv/screenshots/now-playing.png)
 
@@ -11,21 +11,21 @@ There are two pieces to install. The **webOS launcher** remembers your server ad
 ## What you need
 
 - A rooted LG webOS TV with a way to install an IPK, such as Glasshouse. This guide assumes your TV can already sideload apps.
-- An LMS instance reachable from the TV, with **LyrionJS 0.2.34** installed and enabled. The TV page is based on that exact plugin version. If the plugin is missing, see the [upstream install instructions](https://github.com/JameZUK/LyrionJS#install). Check the installed version before replacing the page.
+- An LMS 8.0 or later instance reachable from the TV. The build includes the compatible LyrionJS plugin, so you can start with a fresh LMS installation.
 - Python 3.9 or later on the computer you build from. The build runs offline once you have the repository.
 
 The compatibility work targets the Chromium 53 app runtime used by older webOS 4.x TVs. Playback and sync can vary by model and audio output.
 
 ## Install and connect
 
-1. In LMS, enable LyrionJS under **Settings → Plugins** and apply the change. From a computer, open your server's LyrionJS page to check it loads. The standard path is `/plugins/LyrionJS/`.
-2. Build the TV files from a checkout of this repository:
+1. Build both packages from a checkout of this repository:
 
    ```sh
    python3 tv/build.py
    ```
 
-3. On the LMS host, back up the installed plugin's `Plugins/LyrionJS/HTML/lyrionjs.html`. Replace it with `tv/dist/lyrionjs.html`, preserving ownership and permissions, then restart LMS. If LMS runs in a container, the file may be under its mounted configuration directory. [Build and deployment details](tv/README.md)
+2. On the LMS host, stop LMS. If LyrionJS is already installed, back up its directory and move it out of the plugin search paths so LMS loads just one copy. Extract `tv/dist/LyrionJS-0.2.34-tv.zip` into a folder named `LyrionJS` inside an LMS `Plugins` directory. For a container, use a persistent directory mounted into an LMS plugin search path. Check that you have `Plugins/LyrionJS/install.xml` and `Plugins/LyrionJS/HTML/lyrionjs.html`. [Build and deployment details](tv/README.md)
+3. Start LMS and check that **LyrionJS** is enabled under **Settings → Plugins**. Open `/plugins/LyrionJS/` on your LMS from a computer to confirm the plugin loads.
 4. Install `tv/dist/org.lyrionjs.tv_1.1.0_all.ipk` on the TV, then open **Lyrion TV** from the app launcher. Enter the full address, replacing `lms.example` with your server's hostname or IP and adjusting the port if needed:
 
    ```text
@@ -83,7 +83,7 @@ The launcher always adds `tvnav=1` to enable TV navigation. It preserves the oth
 - **The page opens but the remote doesn't move focus.** Confirm you launched **Lyrion TV** from the app launcher and that LMS is serving the built HTML. Restart LMS after replacing the file and fully relaunch the TV app. Try `tvdebug=1` for startup status.
 - **The interface works but the TV is silent.** Check that **Play music in this browser** is enabled and that the TV is the selected LMS player. Press **Blue** to see the output mode, input format and playback counters.
 - **Playback skips or sync drifts.** Play a track on the TV by itself first. Then try one other player in a sync group. Use Blue diagnostics to compare scheduling and sync corrections, and change one URL flag at a time.
-- **An LMS plugin update replaced the TV page.** Check the installed LyrionJS version before rebuilding or reinstalling. To undo the TV page change, restore your original HTML backup and restart LMS.
+- **An LMS plugin update replaced the TV build.** Reinstall the plugin ZIP from this fork and skip upstream LyrionJS updates for this installation. To roll back, stop LMS, remove the TV plugin directory, restore your previous plugin directory if you had one, and start LMS.
 
 ## Source and licence
 
