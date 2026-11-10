@@ -1,0 +1,19 @@
+{
+  "lyrionVersion": "0.2.34",
+  "target": "Chrome 53",
+  "babel": "8.1.0",
+  "scripts": {
+    "lj-worklet": {
+      "sourceSha256": "beccd92161a32873a24fb96ba381e9d8f3e44a7aa83f0fda2cb0646526bc9b42",
+      "outputSha256": "c1df17af3f89981710064465f35e1474482500c7a52450020b3f6fddba3dfd2f"
+    },
+    "lj-lib": {
+      "sourceSha256": "26ff4c18589cf10155b0808dd6ee8ca9fa9d916955cd3f04a08ec51310c11e77",
+      "outputSha256": "25838323ffd20490164b7e34c4d1dd55507662ed05452581d9abbbd880893eac"
+    },
+    "lj-app": {
+      "sourceSha256": "2edd30d22aefb054983d44428fd953863ed944d4cf8be6fbed01310342d316ee",
+      "outputSha256": "8886f1a40e7666d0108ad96f1f25d4242b89588a67d245e0d7908af69bf9a57e"
+    }
+  }
+}

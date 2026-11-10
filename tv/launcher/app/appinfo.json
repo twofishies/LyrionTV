@@ -1,0 +1,12 @@
+{
+  "id": "org.lyrionjs.tv",
+  "version": "1.1.0",
+  "vendor": "Local",
+  "type": "web",
+  "main": "index.html",
+  "title": "Lyrion TV",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "resolution": "1920x1080",
+  "requiredACG": []
+}

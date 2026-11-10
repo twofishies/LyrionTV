@@ -1,0 +1,27 @@
+/* Fallback for Chromium 53, which predates unprefixed CSS Grid. */
+@supports not (display: grid) {
+  html[data-tv-compat] body { display:block; }
+  html[data-tv-compat] #top { position:absolute;top:0;left:0;right:0;height:var(--top); }
+  html[data-tv-compat] #nav { position:absolute;top:var(--top);bottom:var(--bar);left:0;width:var(--nav); }
+  html[data-tv-compat] #view { position:absolute;top:var(--top);bottom:var(--bar);left:var(--nav);right:0; }
+  html[data-tv-compat] #bar { position:absolute;bottom:0;left:0;right:0;height:var(--bar); }
+  html[data-tv-compat] .grid, html[data-tv-compat] .players, html[data-tv-compat] .tiles, html[data-tv-compat] .home, html[data-tv-compat] .row-actions { display:flex;flex-wrap:wrap; }
+  html[data-tv-compat] .grid > *, html[data-tv-compat] .tiles > *, html[data-tv-compat] .home > * { flex:0 0 160px;margin:8px; }
+  html[data-tv-compat] .players > * { flex:1 0 320px;margin:8px; }
+  html[data-tv-compat] .row-actions > * { flex:0 0 130px;margin:5px; }
+  html[data-tv-compat] .np { display:flex;flex-wrap:wrap; }
+  html[data-tv-compat] .np > * { flex:1 1 280px;margin:16px; }
+  html[data-tv-compat] .bar-main { display:flex;justify-content:space-between; }
+  html[data-tv-compat] .bar-main > * { margin:0 6px; }
+  html[data-tv-compat] .kv-row { display:flex; }
+  html[data-tv-compat] .kv-row > :first-child { flex:0 0 170px; }
+  html[data-tv-compat] .ib, html[data-tv-compat] .art { display:inline-flex;align-items:center;justify-content:center; }
+  html[data-tv-compat] #sheet, html[data-tv-compat] .sheet-scrim { top:0;right:0;bottom:0;left:0; }
+  html[data-tv-compat] .sheet-panel { width:440px;max-width:calc(100vw - 24px);max-height:80vh; }
+  html[data-tv-compat] .art img, html[data-tv-compat] .swatch-pick { top:0;right:0;bottom:0;left:0; }
+  html[data-tv-compat] .mirror { width:220px;height:220px; }
+  html[data-tv-compat][data-skin="material"] #view { left:0; }
+  html[data-tv-compat][data-skin="material"] #nav { position:fixed;top:0;bottom:0;width:400px;max-width:85vw; }
+  html[data-tv-compat] #scrim { top:0;right:0;bottom:0;left:0; }
+  html[data-tv-compat][data-skin="material"] #fab { display:flex;align-items:center;justify-content:center; }
+}

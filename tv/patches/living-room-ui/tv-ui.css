@@ -1,0 +1,117 @@
+/* Living room layout. Chrome 53: flexbox, rem, custom properties; no Grid dependency. */
+html[data-lyrion-tv] { font-size:1.25vw; --nav:13.5rem; --top:3.45rem; --bar:4.15rem; }
+@media (max-width:1100px) { html[data-lyrion-tv] { font-size:15px; --nav:12rem; } }
+@media (min-width:2080px) { html[data-lyrion-tv] { font-size:26px; } }
+html[data-lyrion-tv="large"] { font-size:1.45vw; }
+@media (max-width:1100px) { html[data-lyrion-tv="large"] { font-size:17px; } }
+@media (min-width:2000px) { html[data-lyrion-tv="large"] { font-size:29px; } }
+
+html[data-lyrion-tv] body { font:1rem/1.35 sans-serif; }
+html[data-lyrion-tv] #top { padding:0 1.4rem; }
+html[data-lyrion-tv] #top > * + * { margin-left:.55rem; }
+html[data-lyrion-tv] #top .brand { font-size:1.25rem; flex:none; }
+html[data-lyrion-tv] .brand-logo { width:1.55rem;height:1.55rem;margin-right:.4rem; }
+html[data-lyrion-tv] #serverName { font-size:.82rem; }
+html[data-lyrion-tv] #localBadge,html[data-lyrion-tv] #playerBtn { font-size:.94rem;min-height:2.3rem;padding:.35rem .65rem; }
+html[data-lyrion-tv] #playerBtn { max-width:30vw; }
+html[data-lyrion-tv] #playerBtn .ic { width:1.05rem;height:1.05rem;margin-right:.3rem; }
+html[data-lyrion-tv] #nav { padding:.55rem .65rem 1rem; }
+html[data-lyrion-tv] .nav-item { min-height:2.45rem;padding:.4rem .65rem;font-size:1rem; }
+html[data-lyrion-tv] .nav-item .ic { width:1.12rem;height:1.12rem;margin-right:.55rem; }
+html[data-lyrion-tv] .nav-sep { margin:.45rem .35rem; }
+html[data-lyrion-tv] #view { padding:0 1.45rem 1.6rem; }
+html[data-lyrion-tv] .view-head { padding:.75rem 0 .6rem; }
+html[data-lyrion-tv] .view-head h1 { font-size:1.65rem; }
+html[data-lyrion-tv] .view-head .ib { margin-right:.35rem; }
+html[data-lyrion-tv] h3.section { font-size:.95rem;margin:1.05rem 0 .55rem; }
+html[data-lyrion-tv] .ic { width:1.2rem;height:1.2rem; }
+html[data-lyrion-tv] .ib,html[data-lyrion-tv] .row .more,html[data-lyrion-tv] .card .more { width:2.3rem;height:2.3rem;min-height:2.3rem; }
+html[data-lyrion-tv] .ib.big { width:3.5rem;height:3.5rem; }
+html[data-lyrion-tv] .ib.big .ic { width:1.8rem;height:1.8rem; }
+html[data-lyrion-tv] .ib.mid { width:2.7rem;height:2.7rem; }
+html[data-lyrion-tv] .btn,html[data-lyrion-tv] .btn.sm,html[data-lyrion-tv] .field,html[data-lyrion-tv] .select {
+  min-height:2.35rem;font-size:.95rem;padding:.45rem .65rem;
+}
+html[data-lyrion-tv] .btn .ic { margin-right:.25rem; }
+html[data-lyrion-tv] .row { min-height:3.1rem;padding:.35rem .55rem; }
+html[data-lyrion-tv] .row > * + * { margin-left:.5rem; }
+html[data-lyrion-tv] .row .num { width:1.7rem; }
+html[data-lyrion-tv] .t1.big,html[data-lyrion-tv] .card .t1 { font-size:1.04rem; }
+html[data-lyrion-tv] .t2,html[data-lyrion-tv] .row .right,html[data-lyrion-tv] .disc,html[data-lyrion-tv] .pcard-now { font-size:.85rem; }
+html[data-lyrion-tv] .art.sm { width:2.45rem;height:2.45rem; }
+html[data-lyrion-tv] .art.sm .ic { width:1.1rem;height:1.1rem; }
+html[data-lyrion-tv] .art.lg,html[data-lyrion-tv] .art.xl { display:block;height:0;padding-bottom:100%; }
+html[data-lyrion-tv] .art.lg .ph,html[data-lyrion-tv] .art.xl .ph {
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+html[data-lyrion-tv] .grid,html[data-lyrion-tv] .tiles,html[data-lyrion-tv] .home,html[data-lyrion-tv] .players,html[data-lyrion-tv] .row-actions {
+  display:flex;flex-wrap:wrap;align-items:stretch;
+}
+html[data-lyrion-tv][data-tv-compat] .grid > *,
+html[data-lyrion-tv][data-tv-compat] .tiles > *,
+html[data-lyrion-tv][data-tv-compat] .home > * { flex:0 0 9.6rem;margin:.3rem; }
+html[data-lyrion-tv] .grid > *,html[data-lyrion-tv] .tiles > *,html[data-lyrion-tv] .home > * { flex:0 0 9.6rem;margin:.3rem; }
+html[data-lyrion-tv] .tile { min-height:5.6rem;padding:.45rem;text-align:center; }
+html[data-lyrion-tv][data-tv-compat] .players > *,html[data-lyrion-tv] .players > * { flex:1 1 16rem;margin:.35rem;min-width:0; }
+html[data-lyrion-tv] .pcard { padding:.65rem; }
+html[data-lyrion-tv] .pcard-ctrls > * { margin:.15rem; }
+html[data-lyrion-tv][data-tv-compat] .row-actions > .btn,html[data-lyrion-tv] .row-actions > .btn { flex:0 0 7rem;height:3.7rem;margin:.18rem;font-size:.8rem; }
+html[data-lyrion-tv] .card .more { opacity:.9; }
+html[data-lyrion-tv] .hero { align-items:center; }
+html[data-lyrion-tv] .hero-art { width:10rem !important;height:10rem;margin-right:1rem; }
+html[data-lyrion-tv] .hero-meta h2 { font-size:1.65rem; }
+html[data-lyrion-tv][data-tv-compat] .np,html[data-lyrion-tv] .np {
+  display:flex;flex-wrap:nowrap;align-items:center;max-width:none;padding:1rem 0;min-height:0;
+}
+html[data-lyrion-tv][data-tv-compat] .np > .np-art,html[data-lyrion-tv] .np > .np-art {
+  flex:0 0 34%;max-width:16rem;min-width:0;margin:0 1.2rem 0 0;
+}
+html[data-lyrion-tv][data-tv-compat] .np > .np-info,html[data-lyrion-tv] .np > .np-info {
+  flex:1 1 auto;min-width:0;margin:0;
+}
+html[data-lyrion-tv] .np-title,html[data-lyrion-tv][data-skin="material"] .np-title { font-size:2rem;word-wrap:break-word; }
+html[data-lyrion-tv] .np-sub,html[data-lyrion-tv][data-skin="material"] .np-sub { font-size:1.15rem; }
+html[data-lyrion-tv] .np-quality,html[data-lyrion-tv] .tm,html[data-lyrion-tv] .np-next { font-size:.82rem; }
+html[data-lyrion-tv] .tm { min-width:2.2rem; }
+html[data-lyrion-tv] .np-ctrls .ib { margin:0 .15rem; }
+html[data-lyrion-tv] .np-vol { max-width:16rem; }
+html[data-lyrion-tv] input[type="range"] { height:1.6rem; }
+html[data-lyrion-tv] input[type="range"]::-webkit-slider-runnable-track { height:.25rem; }
+html[data-lyrion-tv] input[type="range"]::-webkit-slider-thumb { width:.82rem;height:.82rem;margin-top:-.285rem; }
+html[data-lyrion-tv][data-tv-compat] .bar-main,html[data-lyrion-tv] .bar-main { display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem; }
+html[data-lyrion-tv] .bar-main > * { margin:0 .35rem; }
+html[data-lyrion-tv] .bar-np { flex:1;min-width:0; }
+html[data-lyrion-tv] .bar-np .meta { margin-left:.45rem; }
+html[data-lyrion-tv] .bar-ctrls,html[data-lyrion-tv] .bar-right { flex:none; }
+html[data-lyrion-tv] .bar-art .art,html[data-lyrion-tv][data-skin="material"] .bar-art .art { width:2.8rem;height:2.8rem; }
+html[data-lyrion-tv] .bar-time,html[data-lyrion-tv][data-skin="material"] .bar-time,
+html[data-lyrion-tv][data-skin="material"] .bar-pos { font-size:.82rem; }
+html[data-lyrion-tv] .bar-vol { width:6.4rem; }
+html[data-lyrion-tv] .bar-prog { height:.22rem; }
+html[data-lyrion-tv] .settings section { max-width:50rem;padding:.55rem .8rem 1rem; }
+html[data-lyrion-tv] .settings h3 { font-size:1.1rem; }
+html[data-lyrion-tv] .setting,html[data-lyrion-tv] .kv-row { font-size:.95rem;padding:.48rem 0; }
+html[data-lyrion-tv][data-tv-compat] .kv-row,html[data-lyrion-tv] .kv-row { display:flex; }
+html[data-lyrion-tv][data-tv-compat] .kv-row > :first-child,html[data-lyrion-tv] .kv-row > :first-child { flex:0 0 29%;margin-right:.65rem; }
+html[data-lyrion-tv] .kv-row .v { flex:1;min-width:0;word-wrap:break-word; }
+html[data-lyrion-tv] .switch { width:2.8rem;height:1.55rem; }
+html[data-lyrion-tv] .switch::after { top:.15rem;left:.15rem;width:1.25rem;height:1.25rem; }
+html[data-lyrion-tv] .switch:checked::after { transform:translateX(1.25rem); }
+html[data-lyrion-tv][data-tv-compat] .sheet-panel,html[data-lyrion-tv] .sheet-panel {
+  width:29rem;max-width:90vw;max-height:78vh;
+}
+html[data-lyrion-tv] .sheet-head { flex:none; }
+html[data-lyrion-tv] .sheet-list { min-height:0;overflow-y:auto; }
+html[data-lyrion-tv] .sheet-title .t1 { font-size:1.16rem; }
+html[data-lyrion-tv] .sheet-item { min-height:2.6rem;padding:.45rem .65rem; }
+html[data-lyrion-tv] .sheet-item .ic { margin-right:.5rem; }
+html[data-lyrion-tv] #conn,html[data-lyrion-tv] #update,html[data-lyrion-tv] #toast { font-size:.95rem; }
+html[data-lyrion-tv] [data-tv-focus="true"] {
+  outline:.18rem solid #32ddff!important;outline-offset:-.18rem!important;
+  box-shadow:inset 0 0 0 .28rem rgba(0,0,0,.8)!important;
+}
+html[data-lyrion-tv][data-skin="material"] #nav { width:16rem; }
+html[data-lyrion-tv][data-skin="material"] #view { padding-left:1.4rem;padding-right:1.4rem; }
+html[data-lyrion-tv][data-tv-compat][data-skin="material"] body[data-view="now"] #view { position:absolute;bottom:0; }
+html[data-lyrion-tv][data-skin="material"] .bar-ctrls .ib:not(.mid),
+html[data-lyrion-tv][data-skin="material"] .np-ctrls .ib:not(.big) { width:2.3rem;height:2.3rem; }

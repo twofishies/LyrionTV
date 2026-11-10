@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lyrion TV</title>
+<style>
+*{box-sizing:border-box}body{background:#101828;color:#f8fafc;font:28px/1.4 sans-serif;margin:8% 10%}
+[hidden]{display:none!important}h1{font-size:2em;margin:0 0 .65em}.brand{display:flex;align-items:center}.brand img{width:2.1em;height:2.1em;margin-right:.55em}
+input{display:block;width:100%;max-width:1050px;font:inherit;padding:.65em;margin:.6em 0 1em;background:#172337;color:inherit;border:2px solid #64748b;border-radius:.3em}
+button{font:inherit;padding:.52em 1.2em;color:#0d1927;background:#48ded3;border:0;border-radius:.35em}
+button:focus,input:focus{outline:4px solid #fff;outline-offset:5px}
+p{margin:.6em 0 1em;color:#cbd5e1}#error{color:#ffc0b9}small{color:#cbd5e1}
+</style></head>
+<body><h1 class="brand"><img src="icon.png" alt="">Lyrion TV</h1>
+<section id="startup" hidden>
+  <p>Opening your music server…</p>
+  <button id="settings">Change server</button>
+  <p><small>Press Blue or OK to open setup.</small></p>
+</section>
+<section id="setup" hidden>
+  <label for="url">LyrionJS server URL</label>
+  <input id="url" type="url" placeholder="http://YOUR-LMS:9000/plugins/LyrionJS/" autocomplete="off" spellcheck="false">
+  <button id="connect">Save and connect</button>
+  <p><small>Enter the full LyrionJS address once. Up/Down moves focus; OK edits or connects.</small></p>
+  <p id="error" role="alert"></p>
+</section>
+<script src="config.js"></script><script src="launcher.js"></script></body></html>

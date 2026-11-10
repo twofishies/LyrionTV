@@ -183,3 +183,7 @@ LyrionJS is an independent project, not an official Lyrion one.
 
 - [How it works, and the protocol](docs/ARCHITECTURE.md)
 - [Building, testing and releasing](docs/DEVELOPMENT.md)
+
+## Lyrion TV
+
+See [Lyrion TV build and deployment](tv/README.md) for the webOS launcher and LMS-hosted TV page.

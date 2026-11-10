@@ -1,0 +1,25 @@
+/* The living-room layout supplies the typography and spacing. */
+html[data-lyrion-tv] #serverName { display:none; }
+html[data-lyrion-tv] .view-head { background:var(--bg); }
+html[data-lyrion-tv] .art img,
+html[data-lyrion-tv] .ib { transition:none; }
+html[data-lyrion-tv][data-skin="material"] #toast {
+  background:var(--bg2);color:var(--fg);-webkit-backdrop-filter:none;backdrop-filter:none;
+}
+html[data-lyrion-tv][data-skin="material"] body[data-view="now"]::before,
+html[data-lyrion-tv][data-skin="material"] body[data-view="now"]::after { content:none; }
+
+html[data-lyrion-tv] body[data-view="now"] { --bar:0px; }
+html[data-lyrion-tv] body[data-view="now"] #bar { display:none; }
+html[data-lyrion-tv] body[data-view="now"] .np {
+  min-height:calc(100vh - var(--top) - 6rem);
+  max-width:54rem;
+  margin:0 auto;
+}
+html[data-lyrion-tv] .card .more,
+html[data-lyrion-tv] .row .more { opacity:.5; }
+html[data-lyrion-tv] .card:hover .more,
+html[data-lyrion-tv] .row:hover .more,
+html[data-lyrion-tv] [data-tv-focus] > .more,
+html[data-lyrion-tv] .more[data-tv-focus],
+html[data-lyrion-tv] .swatch-pick[data-tv-focus] { opacity:1; }
