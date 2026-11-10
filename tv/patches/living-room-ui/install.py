@@ -37,9 +37,9 @@ block = """<!-- LYRION-TV-LIVING-ROOM-UI-1 -->
 <script>
 (function () {
   var q = location.search;
-  if (!/[?&]tvnav=1(?:&|$)/.test(q) || /[?&]tvui=0(?:&|$)/.test(q)) { return; }
+  if (/[?&]tvui=0(?:&|$)/.test(q)) { return; }
   var mode = /[?&]tvui=(1|large)(?:&|$)/.exec(q);
-  if (!mode && !/WebAppManager/i.test(navigator.userAgent)) { return; }
+  if (!mode && (!/[?&]tvnav=1(?:&|$)/.test(q) || !/WebAppManager/i.test(navigator.userAgent))) { return; }
   document.documentElement.setAttribute('data-lyrion-tv', mode && mode[1] === 'large' ? 'large' : 'normal');
 }());
 </script>

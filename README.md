@@ -64,7 +64,7 @@ http://lms.example:9000/plugins/LyrionJS/?tvui=large&tvschedheadroom=0
 
 | Flag | Effect |
 | --- | --- |
-| `tvui=large` | Makes the TV layout larger. Use `tvui=0` to turn off TV sizing. The launcher defaults to `tvui=1`. |
+| `tvui=large` | Makes the TV layout larger, including on direct LMS links. Use `tvui=0` to turn off TV sizing. The launcher defaults to `tvui=1`. |
 | `tvdebug=1` | Shows the startup status panel. Use it if the player page fails to load. |
 | `tvperf=0` | Disables the playback performance trace. |
 | `tvschedheadroom=0` | Uses a 650 ms scheduling window instead of the default one second. Useful for comparing playback or sync behaviour. |
