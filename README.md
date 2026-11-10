@@ -51,7 +51,6 @@ The launcher automatically reconnects to the saved address on later launches. To
 | Play, Pause, Stop | Controls the selected LMS player. |
 | Rewind, Fast Forward | Tap for the previous or next track. Hold to seek backward or forward in 10-second steps on seekable tracks. |
 | Volume, Mute | Use the TV's own volume and mute buttons for TV output. |
-| Yellow | No Lyrion TV action. |
 
 For remote navigation, start with one of **LyrionJS's own layouts**. Separate LMS skins, including the standalone Material Skin shown inside LyrionJS, manage their own controls.
 
